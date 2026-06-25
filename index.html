@@ -13,6 +13,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Always open at the very top: stop the browser from restoring a
+         previous scroll position or jumping to an estimated section. -->
+    <script>
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+        window.addEventListener("load", function () {
+            if (!location.hash) {
+                var h = document.documentElement, prev = h.style.scrollBehavior;
+                h.style.scrollBehavior = "auto";
+                window.scrollTo(0, 0);
+                h.style.scrollBehavior = prev;
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- Ember / particle canvas backdrop -->

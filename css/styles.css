@@ -1784,21 +1784,9 @@ ul, ol { list-style: none; }
     .stats { flex-wrap: wrap; gap: 1.4rem; }
     .footer__bar { flex-direction: column; }
 
-    /* Center the product reliably — a flex column avoids the grid
-       auto-column drift that left it slightly off-center — and float
-       the spec tags into the top/bottom margins so they never overlap
-       the product artwork or its writing. */
-    .hero__product {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    .mammoth {
-        width: min(76%, 300px);
-        margin-inline: auto;
-    }
-    .mammoth__ring { display: none; }
+    /* Keep the spec tags out of the product writing. Centering is left to
+       the default grid layout (.hero__product { place-items: center }) —
+       the same centering the product had originally. */
     .spec { top: auto; right: auto; bottom: auto; left: auto; }
     .spec--1 { top: 0; left: 4%; }
     .spec--2 { top: 0; right: 4%; }
