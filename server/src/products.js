@@ -9,24 +9,24 @@ const PRODUCTS = {
         name: "Single Surge",
         sku: "MS-CAP-01",
         capsules: 1,
-        amount: 1999, // $19.99
-        weightOz: 1,
+        amount: 800, // $8.00
+        weightOz: 2,
     },
     mammoth: {
         id: "mammoth",
         name: "Mammoth Pack",
-        sku: "MS-CAP-06",
-        capsules: 6,
-        amount: 7999, // $79.99
+        sku: "MS-CAP-03",
+        capsules: 3,
+        amount: 2000, // $20.00
         weightOz: 4,
     },
     beast: {
         id: "beast",
         name: "Beast Mode",
-        sku: "MS-CAP-12",
-        capsules: 12,
-        amount: 12999, // $129.99
-        weightOz: 8,
+        sku: "MS-CAP-10",
+        capsules: 10,
+        amount: 5000, // $50.00
+        weightOz: 10,
     },
 };
 

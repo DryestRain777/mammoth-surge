@@ -1728,13 +1728,11 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================================
-   PERFORMANCE — skip rendering of offscreen sections
+   PERFORMANCE — offscreen sections
+   content-visibility:auto was removed: its intrinsic-size estimate
+   made the page jump to a mid-page section on load (scroll anchoring)
+   on mobile. The throttled ember canvas is the real performance win.
    ============================================================ */
-.benefits, .unleash, .science, .formula, .showcase,
-.reviews, .buy, .faq, .final, .footer {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 720px;
-}
 
 /* ============================================================
    RESPONSIVE
@@ -1786,19 +1784,25 @@ ul, ol { list-style: none; }
     .stats { flex-wrap: wrap; gap: 1.4rem; }
     .footer__bar { flex-direction: column; }
 
-    /* Center the product and float the spec tags into the top/bottom margins
-       so they never overlap the product artwork or its writing */
-    .hero__product { justify-items: center; }
+    /* Center the product reliably — a flex column avoids the grid
+       auto-column drift that left it slightly off-center — and float
+       the spec tags into the top/bottom margins so they never overlap
+       the product artwork or its writing. */
+    .hero__product {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     .mammoth {
-        width: min(78%, 320px);
+        width: min(76%, 300px);
         margin-inline: auto;
-        justify-self: center;
     }
     .mammoth__ring { display: none; }
     .spec { top: auto; right: auto; bottom: auto; left: auto; }
-    .spec--1 { top: 0; left: 5%; }
-    .spec--2 { top: 0; right: 5%; }
-    .spec--3 { bottom: 0; left: 5%; }
+    .spec--1 { top: 0; left: 4%; }
+    .spec--2 { top: 0; right: 4%; }
+    .spec--3 { bottom: 0; left: 4%; }
 
     /* Performance: drop the heaviest GPU layers on phones */
     #ember-canvas, .grain,
