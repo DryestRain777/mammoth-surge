@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0705" />
+    <meta name="description" content="Mammoth Surge by Zorvan Labs — premium male enhancement. Girth. Stamina. Peak Performance. Fast-acting, lab-tested, quality assured." />
+    <title>Mammoth Surge™ | Premium Male Enhancement — Zorvan Labs</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <!-- Ember / particle canvas backdrop -->
+    <canvas id="ember-canvas" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- ===================== NAV ===================== -->
+    <header class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="#hero" class="brand" aria-label="Zorvan Labs home">
+                <span class="brand__mark">Z</span>
+                <span class="brand__text">
+                    <strong>ZORVAN</strong>
+                    <em>LABS</em>
+                </span>
+            </a>
+
+            <nav class="nav__links" aria-label="Primary">
+                <a href="#benefits">Benefits</a>
+                <a href="#science">The Science</a>
+                <a href="#formula">Formula</a>
+                <a href="#showcase">Product</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#buy">Buy</a>
+            </nav>
+
+            <a href="#buy" class="btn btn--ghost nav__cta">
+                <span>Get Yours</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+
+            <button class="nav__burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="hero">
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__rings" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="hero__grid">
+            <div class="hero__copy">
+                <div class="eyebrow reveal" data-reveal>
+                    <span class="eyebrow__dot"></span>
+                    Premium Male Enhancement
+                </div>
+
+                <h1 class="hero__title">
+                    <span class="reveal-line"><span data-reveal>MAMMOTH</span></span>
+                    <span class="reveal-line hero__title-accent"><span data-reveal>SURGE</span></span>
+                </h1>
+
+                <p class="hero__tagline reveal" data-reveal>
+                    Ultimate Performance <i>•</i> Stamina <i>•</i> Drive
+                </p>
+
+                <p class="hero__lede reveal" data-reveal>
+                    Unleash the strength of the mammoth. One fast-acting capsule engineered for
+                    <strong>maximum drive</strong>, <strong>hardcore stamina</strong>, and
+                    <strong>peak performance</strong> — when it matters most.
+                </p>
+
+                <div class="hero__cta reveal" data-reveal>
+                    <a href="#buy" class="btn btn--primary">
+                        <span>Surge Now</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                    <a href="#science" class="btn btn--text">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>
+                        How it works
+                    </a>
+                </div>
+
+                <ul class="hero__trust reveal" data-reveal>
+                    <li><strong>50K+</strong><span>Bottles shipped</span></li>
+                    <li class="divider" aria-hidden="true"></li>
+                    <li><strong>4.9★</strong><span>Avg. rating</span></li>
+                    <li class="divider" aria-hidden="true"></li>
+                    <li><strong>Lab</strong><span>Tested &amp; assured</span></li>
+                </ul>
+            </div>
+
+            <!-- ===== Product: the Mammoth (front packaging) ===== -->
+            <div class="hero__product" id="product-stage">
+                <div class="product-aura" aria-hidden="true"></div>
+
+                <!-- Floating spec tags -->
+                <div class="spec spec--1 reveal" data-reveal><span>Fast Acting</span></div>
+                <div class="spec spec--2 reveal" data-reveal><span>1 Capsule Dose</span></div>
+                <div class="spec spec--3 reveal" data-reveal><span>Made in USA</span></div>
+
+                <!-- Mammoth product image -->
+                <div class="mammoth" id="mammoth" role="img" aria-label="Mammoth Surge front packaging — a powerful mammoth wreathed in fire">
+                    <span class="mammoth__ring mammoth__ring--1" aria-hidden="true"></span>
+                    <span class="mammoth__ring mammoth__ring--2" aria-hidden="true"></span>
+                    <div class="mammoth__card">
+                        <!-- Fallback emblem: shows automatically until assets/mammoth-front.png is added -->
+                        <div class="mammoth__fallback" aria-hidden="true">
+                            <span class="mammoth__brand">⚡ ZORVAN LABS</span>
+                            <svg class="mammoth__svg" viewBox="0 0 240 220" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="mgold" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0" stop-color="#ffe7a8"/>
+                                        <stop offset=".5" stop-color="#f4c14b"/>
+                                        <stop offset="1" stop-color="#c8801c"/>
+                                    </linearGradient>
+                                </defs>
+                                <g fill="none" stroke="url(#mgold)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M120 40C92 40 74 60 72 86 60 90 54 106 60 122 66 138 84 146 96 148 104 170 116 182 120 186 124 182 136 170 144 148 156 146 174 138 180 122 186 106 180 90 168 86 166 60 148 40 120 40Z"/>
+                                    <path d="M72 86C50 78 40 90 44 108 56 106 66 100 72 94"/>
+                                    <path d="M168 86C190 78 200 90 196 108 184 106 174 100 168 94"/>
+                                    <path d="M98 48C108 36 132 36 142 48"/>
+                                    <path d="M120 118C114 136 126 144 120 162 116 174 122 182 120 186"/>
+                                    <path d="M112 136h16M114 152h12M116 168h8"/>
+                                    <path d="M104 136C80 144 60 164 56 192 70 182 86 176 100 174"/>
+                                    <path d="M136 136C160 144 180 164 184 192 170 182 154 176 140 174"/>
+                                    <circle cx="100" cy="102" r="4" fill="url(#mgold)" stroke="none"/>
+                                    <circle cx="140" cy="102" r="4" fill="url(#mgold)" stroke="none"/>
+                                </g>
+                            </svg>
+                            <strong>MAMMOTH SURGE</strong>
+                            <em>Premium Male Enhancement</em>
+                        </div>
+                        <img class="mammoth__img" src="assets/Mammoth%20Surge%20Front.jpeg"
+                             alt="Mammoth Surge premium male enhancement — front packaging"
+                             onerror="this.style.display='none';" />
+                        <span class="mammoth__sheen" aria-hidden="true"></span>
+
+                        <!-- Animated capsule overlaid on the product (matches packaging placement) -->
+                        <div class="caps" aria-hidden="true">
+                            <span class="caps__shadow"></span>
+                            <span class="caps__blister"></span>
+                            <div class="caps__pill">
+                                <span class="caps__black"></span>
+                                <span class="caps__chrome"></span>
+                                <span class="caps__band"></span>
+                                <span class="caps__gloss"></span>
+                                <span class="caps__glint"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span></span>
+                    Scroll
+                </div>
+            </div>
+        </div>
+
+        <!-- Marquee strip -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee__track">
+                <span>GIRTH</span><i>✦</i><span>STAMINA</span><i>✦</i><span>PEAK PERFORMANCE</span><i>✦</i>
+                <span>FAST ACTING</span><i>✦</i><span>QUALITY ASSURED</span><i>✦</i>
+                <span>GIRTH</span><i>✦</i><span>STAMINA</span><i>✦</i><span>PEAK PERFORMANCE</span><i>✦</i>
+                <span>FAST ACTING</span><i>✦</i><span>QUALITY ASSURED</span><i>✦</i>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== BENEFITS ===================== -->
+    <section class="benefits section" id="benefits">
+        <div class="section__head">
+            <p class="kicker reveal" data-reveal>The Mammoth Difference</p>
+            <h2 class="section__title reveal" data-reveal>Built for <span class="grad">total dominance</span></h2>
+            <p class="section__sub reveal" data-reveal>Three pillars of performance, engineered into a single premium capsule.</p>
+        </div>
+
+        <div class="benefits__grid">
+            <article class="card reveal" data-reveal>
+                <div class="card__icon">
+                    <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true"><path d="M24 6c6 6 12 11 12 19a12 12 0 1 1-24 0c0-8 6-13 12-19z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M24 34a6 6 0 0 0 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                </div>
+                <h3>Girth</h3>
+                <p>Enhanced blood flow technology designed to maximize fullness and visible size where it counts.</p>
+                <span class="card__index">01</span>
+            </article>
+
+            <article class="card reveal" data-reveal>
+                <div class="card__icon">
+                    <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true"><path d="M26 4 10 27h12l-2 17 18-25H26z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>Stamina</h3>
+                <p>Sustained energy and endurance so you stay in the game longer, with relentless drive from start to finish.</p>
+                <span class="card__index">02</span>
+            </article>
+
+            <article class="card reveal" data-reveal>
+                <div class="card__icon">
+                    <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true"><path d="M6 40 18 22l8 9 7-13 9 22z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="38" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+                </div>
+                <h3>Peak Performance</h3>
+                <p>Confidence-boosting formula that delivers fast-acting results for your most demanding moments.</p>
+                <span class="card__index">03</span>
+            </article>
+        </div>
+    </section>
+
+    <!-- ===================== UNLEASH (label benefits) ===================== -->
+    <section class="unleash section" id="unleash">
+        <div class="section__head">
+            <p class="kicker reveal" data-reveal>Unleash the Strength of the Mammoth</p>
+            <h2 class="section__title reveal" data-reveal>Six ways to <span class="grad">dominate</span></h2>
+            <p class="section__sub reveal" data-reveal>Every capsule is engineered to deliver across the full spectrum of male performance.</p>
+        </div>
+
+        <ul class="unleash__grid">
+            <li class="unleash__item reveal" data-reveal>
+                <span class="unleash__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M13 2c1 4-2 5-3 8-1 2 .2 4 2 4 3 0 4-3 3-6 3 2 5 5 5 9a8 8 0 1 1-16 0c0-5 4-7 5-11 .4-1.6 2-3 4-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+                <h4>Maximum Drive &amp; Desire</h4>
+                <p>Maca root and Tongkat Ali reignite raw libido and the hunger to perform.</p>
+            </li>
+            <li class="unleash__item reveal" data-reveal>
+                <span class="unleash__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M13 2c1 4-2 5-3 8-1 2 .2 4 2 4 3 0 4-3 3-6 3 2 5 5 5 9a8 8 0 1 1-16 0c0-5 4-7 5-11 .4-1.6 2-3 4-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+                <h4>Increased Blood Flow</h4>
+                <p>L-Citrulline fuels nitric-oxide circulation for fuller, harder results.</p>
+            </li>
+            <li class="unleash__item reveal" data-reveal>
+                <span class="unleash__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M13 2c1 4-2 5-3 8-1 2 .2 4 2 4 3 0 4-3 3-6 3 2 5 5 5 9a8 8 0 1 1-16 0c0-5 4-7 5-11 .4-1.6 2-3 4-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+                <h4>Hardcore Stamina</h4>
+                <p>Sustained, clean energy to stay relentless from first touch to finish.</p>
+            </li>
+            <li class="unleash__item reveal" data-reveal>
+                <span class="unleash__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M13 2c1 4-2 5-3 8-1 2 .2 4 2 4 3 0 4-3 3-6 3 2 5 5 5 9a8 8 0 1 1-16 0c0-5 4-7 5-11 .4-1.6 2-3 4-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+                <h4>Peak Performance</h4>
+                <p>A fast-acting surge tuned for your most demanding moments.</p>
+            </li>
+            <li class="unleash__item reveal" data-reveal>
+                <span class="unleash__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M13 2c1 4-2 5-3 8-1 2 .2 4 2 4 3 0 4-3 3-6 3 2 5 5 5 9a8 8 0 1 1-16 0c0-5 4-7 5-11 .4-1.6 2-3 4-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+                <h4>Intense Pleasure</h4>
+                <p>Heightened sensitivity and unshakeable confidence when it counts.</p>
+            </li>
+            <li class="unleash__item reveal" data-reveal>
+                <span class="unleash__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M13 2c1 4-2 5-3 8-1 2 .2 4 2 4 3 0 4-3 3-6 3 2 5 5 5 9a8 8 0 1 1-16 0c0-5 4-7 5-11 .4-1.6 2-3 4-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+                <h4>Ultimate Male Vitality</h4>
+                <p>Primal botanicals that restore masculine energy and presence.</p>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ===================== SCIENCE / HOW IT WORKS ===================== -->
+    <section class="science section" id="science">
+        <div class="science__media reveal" data-reveal>
+            <div class="orbit">
+                <div class="orbit__core">
+                    <span class="orbit__pill"></span>
+                </div>
+                <div class="orbit__ring orbit__ring--1"><span></span></div>
+                <div class="orbit__ring orbit__ring--2"><span></span></div>
+                <div class="orbit__ring orbit__ring--3"><span></span></div>
+            </div>
+        </div>
+
+        <div class="science__copy">
+            <p class="kicker reveal" data-reveal>The Science</p>
+            <h2 class="section__title reveal" data-reveal>Fast-acting power, <span class="grad">in 30 minutes</span></h2>
+
+            <ol class="steps">
+                <li class="reveal" data-reveal>
+                    <span class="steps__num">1</span>
+                    <div>
+                        <h4>Take one capsule</h4>
+                        <p>One capsule with water, 30–45 minutes prior to activity. Do not exceed one capsule within 48 hours.</p>
+                    </div>
+                </li>
+                <li class="reveal" data-reveal>
+                    <span class="steps__num">2</span>
+                    <div>
+                        <h4>Rapid absorption</h4>
+                        <p>Piperine (black-pepper extract) accelerates uptake so L-Citrulline and the botanical blend surge into your system fast.</p>
+                    </div>
+                </li>
+                <li class="reveal" data-reveal>
+                    <span class="steps__num">3</span>
+                    <div>
+                        <h4>Peak when you need it</h4>
+                        <p>Feel the surge — heightened stamina, fullness, and rock-solid confidence on demand.</p>
+                    </div>
+                </li>
+            </ol>
+
+            <div class="stats reveal" data-reveal>
+                <div class="stat"><b class="count" data-target="30" data-suffix="min">0</b><span>To kick in</span></div>
+                <div class="stat"><b class="count" data-target="6" data-suffix="hrs">0</b><span>Of support</span></div>
+                <div class="stat"><b class="count" data-target="100" data-suffix="%">0</b><span>Lab tested</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FORMULA / WHAT'S INSIDE ===================== -->
+    <section class="formula section" id="formula">
+        <div class="formula__bg" aria-hidden="true"></div>
+        <div class="section__head">
+            <p class="kicker reveal" data-reveal>What's Inside</p>
+            <h2 class="section__title reveal" data-reveal>The <span class="grad">mammoth formula</span></h2>
+            <p class="section__sub reveal" data-reveal>A 642&nbsp;mg powerhouse of performance botanicals — full transparency, nothing hidden.</p>
+        </div>
+
+        <div class="formula__grid">
+            <div class="actives">
+                <article class="active reveal" data-reveal>
+                    <div class="active__dose">212<small>mg</small></div>
+                    <div class="active__body"><h4>L-Citrulline</h4><p>Boosts nitric-oxide for increased blood flow, fullness and harder, longer-lasting results.</p></div>
+                </article>
+                <article class="active reveal" data-reveal>
+                    <div class="active__dose">112<small>mg</small></div>
+                    <div class="active__body"><h4>Proprietary Blend</h4><p>Our signature surge complex, tuned for rapid, peak male performance.</p></div>
+                </article>
+                <article class="active reveal" data-reveal>
+                    <div class="active__dose">100<small>mg</small></div>
+                    <div class="active__body"><h4>Maca Root Extract</h4><p>Traditional libido botanical that fuels drive, desire and raw energy.</p></div>
+                </article>
+                <article class="active reveal" data-reveal>
+                    <div class="active__dose">90<small>mg</small></div>
+                    <div class="active__body"><h4>Tongkat Ali Extract</h4><p>Prized for supporting healthy testosterone, stamina and vitality.</p></div>
+                </article>
+                <article class="active reveal" data-reveal>
+                    <div class="active__dose">74<small>mg</small></div>
+                    <div class="active__body"><h4>Sangeria Extract</h4><p>Antioxidant-rich botanical to support circulation and endurance.</p></div>
+                </article>
+                <article class="active reveal" data-reveal>
+                    <div class="active__dose">10<small>mg</small></div>
+                    <div class="active__body"><h4>Piperine</h4><p>Black-pepper extract that dramatically enhances absorption of every active.</p></div>
+                </article>
+            </div>
+
+            <aside class="facts reveal" data-reveal>
+                <div class="facts__card">
+                    <h3 class="facts__title">Supplement Facts</h3>
+                    <div class="facts__meta"><span>Serving Size</span><b>1 Capsule</b></div>
+                    <div class="facts__meta facts__meta--bold"><span>Total Weight</span><b>642 mg</b></div>
+                    <table class="facts__table">
+                        <tbody>
+                            <tr><td>L-Citrulline</td><td>212 mg</td></tr>
+                            <tr><td>Proprietary Blend</td><td>112 mg</td></tr>
+                            <tr><td>Maca Root Extract</td><td>100 mg</td></tr>
+                            <tr><td>Tongkat Ali Extract</td><td>90 mg</td></tr>
+                            <tr><td>Sangeria Extract</td><td>74 mg</td></tr>
+                            <tr><td>Piperine</td><td>10 mg</td></tr>
+                            <tr><td>Microcrystalline Cellulose</td><td>12 mg</td></tr>
+                            <tr><td>Lactose</td><td>20 mg</td></tr>
+                            <tr><td>Sodium Sulfate</td><td>8 mg</td></tr>
+                            <tr><td>Magnesium Stearate</td><td>4 mg</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="facts__dv">† Daily Value not established.</p>
+                    <div class="facts__usa"><span class="flag" aria-hidden="true"></span> Made in USA</div>
+                </div>
+            </aside>
+        </div>
+
+        <div class="usage">
+            <div class="usage__col reveal" data-reveal>
+                <h4><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Directions</h4>
+                <p>Take 1 capsule with water 30–45 minutes prior to activity. Do not exceed one capsule within 48 hours.</p>
+            </div>
+            <div class="usage__col usage__col--warn reveal" data-reveal>
+                <h4><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3 2 21h20z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v5M12 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Caution</h4>
+                <p>Consult a healthcare professional before use. Discontinue use if adverse effects occur. Not recommended for individuals under 18 years.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SHOWCASE ===================== -->
+    <section class="showcase section" id="showcase">
+        <div class="showcase__bg" aria-hidden="true"></div>
+        <div class="section__head">
+            <p class="kicker reveal" data-reveal>The Product</p>
+            <h2 class="section__title reveal" data-reveal>Premium by <span class="grad">every measure</span></h2>
+            <p class="section__sub reveal" data-reveal>Sealed for freshness. Engineered for impact. Backed by quality assurance.</p>
+        </div>
+
+        <div class="showcase__stage reveal" data-reveal>
+            <!-- Real product photo -->
+            <div class="showcase__product" id="showcase-product">
+                <div class="showcase__glow" aria-hidden="true"></div>
+                <span class="showcase__ring showcase__ring--1" aria-hidden="true"></span>
+                <span class="showcase__ring showcase__ring--2" aria-hidden="true"></span>
+                <span class="showcase__chip showcase__chip--1"><b>1 Capsule</b></span>
+                <span class="showcase__chip showcase__chip--2"><b>Fast Acting</b></span>
+                <div class="showcase__frame">
+                    <img class="showcase__img" src="assets/Mammoth%20Surge%20Front.jpeg"
+                         alt="Mammoth Surge premium male enhancement — front packaging with capsule" />
+                    <span class="showcase__sheen" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div class="showcase__points">
+                <div class="point reveal" data-reveal>
+                    <span class="point__bullet"></span>
+                    <div><h4>Single-dose convenience</h4><p>One discreet capsule — no daily regimen, no hassle.</p></div>
+                </div>
+                <div class="point reveal" data-reveal>
+                    <span class="point__bullet"></span>
+                    <div><h4>Sealed &amp; protected</h4><p>Blister-packed to lock in potency until the moment you need it.</p></div>
+                </div>
+                <div class="point reveal" data-reveal>
+                    <span class="point__bullet"></span>
+                    <div><h4>Quality assured</h4><p>Third-party lab verified for purity and consistent potency.</p></div>
+                </div>
+                <a href="#buy" class="btn btn--primary reveal" data-reveal>
+                    <span>Add to Cart</span>
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== REVIEWS ===================== -->
+    <section class="reviews section" id="reviews">
+        <div class="section__head">
+            <p class="kicker reveal" data-reveal>Real Results</p>
+            <h2 class="section__title reveal" data-reveal>Trusted by the <span class="grad">relentless</span></h2>
+        </div>
+
+        <div class="reviews__grid">
+            <figure class="quote reveal" data-reveal>
+                <div class="quote__stars">★★★★★</div>
+                <blockquote>"Felt the surge in under an hour. Confidence through the roof — my partner noticed immediately."</blockquote>
+                <figcaption><span class="quote__av">M</span> Marcus R. <em>Verified Buyer</em></figcaption>
+            </figure>
+            <figure class="quote reveal" data-reveal>
+                <div class="quote__stars">★★★★★</div>
+                <blockquote>"One capsule, fast acting, exactly as advertised. Stamina was on another level all night."</blockquote>
+                <figcaption><span class="quote__av">D</span> Devon K. <em>Verified Buyer</em></figcaption>
+            </figure>
+            <figure class="quote reveal" data-reveal>
+                <div class="quote__stars">★★★★★</div>
+                <blockquote>"Premium quality you can feel. This is now a permanent part of my date-night routine."</blockquote>
+                <figcaption><span class="quote__av">A</span> Andre T. <em>Verified Buyer</em></figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ===================== BUY / PRICING ===================== -->
+    <section class="buy section" id="buy">
+        <div class="buy__glow" aria-hidden="true"></div>
+        <div class="section__head">
+            <p class="kicker reveal" data-reveal>Claim Your Surge</p>
+            <h2 class="section__title reveal" data-reveal>Choose your <span class="grad">power pack</span></h2>
+            <p class="section__sub reveal" data-reveal>Free discreet shipping on every order. 30-day satisfaction guarantee.</p>
+        </div>
+
+        <div class="plans">
+            <article class="plan reveal" data-reveal>
+                <header class="plan__head">
+                    <h3>Single Surge</h3>
+                    <p>Try the power</p>
+                </header>
+                <div class="plan__price"><span>$</span>19<small>.99</small></div>
+                <p class="plan__per">1 capsule</p>
+                <ul class="plan__list">
+                    <li>1 × Mammoth Surge capsule</li>
+                    <li>Fast-acting formula</li>
+                    <li>Discreet packaging</li>
+                </ul>
+                <button class="btn btn--ghost btn--block" data-buy="Single Surge">Select</button>
+            </article>
+
+            <article class="plan plan--featured reveal" data-reveal>
+                <span class="plan__flag">Most Popular</span>
+                <header class="plan__head">
+                    <h3>Mammoth Pack</h3>
+                    <p>Best value</p>
+                </header>
+                <div class="plan__price"><span>$</span>79<small>.99</small></div>
+                <p class="plan__per">6 capsules · save 33%</p>
+                <ul class="plan__list">
+                    <li>6 × Mammoth Surge capsules</li>
+                    <li>Priority free shipping</li>
+                    <li>30-day guarantee</li>
+                    <li>Bonus performance guide</li>
+                </ul>
+                <button class="btn btn--primary btn--block" data-buy="Mammoth Pack">Add to Cart</button>
+            </article>
+
+            <article class="plan reveal" data-reveal>
+                <header class="plan__head">
+                    <h3>Beast Mode</h3>
+                    <p>Go all in</p>
+                </header>
+                <div class="plan__price"><span>$</span>129<small>.99</small></div>
+                <p class="plan__per">12 capsules · save 45%</p>
+                <ul class="plan__list">
+                    <li>12 × Mammoth Surge capsules</li>
+                    <li>Priority free shipping</li>
+                    <li>30-day guarantee</li>
+                    <li>VIP restock reminders</li>
+                </ul>
+                <button class="btn btn--ghost btn--block" data-buy="Beast Mode">Select</button>
+            </article>
+        </div>
+
+        <div class="guarantee reveal" data-reveal>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Secure checkout · Lab tested · 30-day money-back guarantee
+        </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="faq section" id="faq">
+        <div class="section__head">
+            <p class="kicker reveal" data-reveal>Questions</p>
+            <h2 class="section__title reveal" data-reveal>Everything you <span class="grad">need to know</span></h2>
+        </div>
+
+        <div class="faq__list">
+            <details class="faq__item reveal" data-reveal>
+                <summary>How fast does Mammoth Surge work?<span class="faq__icon" aria-hidden="true"></span></summary>
+                <p>Take one capsule with water 30–45 minutes prior to activity — most users feel the surge within that window. Do not exceed one capsule within 48 hours.</p>
+            </details>
+            <details class="faq__item reveal" data-reveal>
+                <summary>What's inside each capsule?<span class="faq__icon" aria-hidden="true"></span></summary>
+                <p>A 642&nbsp;mg blend led by L-Citrulline (212&nbsp;mg), Maca Root (100&nbsp;mg), Tongkat Ali (90&nbsp;mg), Sangeria Extract (74&nbsp;mg) and Piperine (10&nbsp;mg) for rapid absorption. The full Supplement Facts are listed in the Formula section.</p>
+            </details>
+            <details class="faq__item reveal" data-reveal>
+                <summary>Where is it made?<span class="faq__icon" aria-hidden="true"></span></summary>
+                <p>Mammoth Surge is proudly made in the USA and third-party lab tested for purity and potency. Not recommended for individuals under 18 years.</p>
+            </details>
+            <details class="faq__item reveal" data-reveal>
+                <summary>How long do the effects last?<span class="faq__icon" aria-hidden="true"></span></summary>
+                <p>A single capsule provides support for up to 6 hours, so you can stay ready when it counts.</p>
+            </details>
+            <details class="faq__item reveal" data-reveal>
+                <summary>Is it safe and lab tested?<span class="faq__icon" aria-hidden="true"></span></summary>
+                <p>Yes. Every batch is third-party lab verified and quality assured. Consult your physician if you have a medical condition or take medication.</p>
+            </details>
+            <details class="faq__item reveal" data-reveal>
+                <summary>Is shipping discreet?<span class="faq__icon" aria-hidden="true"></span></summary>
+                <p>Absolutely. Orders ship free in plain, unmarked packaging for complete privacy.</p>
+            </details>
+            <details class="faq__item reveal" data-reveal>
+                <summary>What's your guarantee?<span class="faq__icon" aria-hidden="true"></span></summary>
+                <p>We back every order with a 30-day satisfaction guarantee. Not impressed? We'll make it right.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- ===================== FINAL CTA ===================== -->
+    <section class="final">
+        <div class="final__inner reveal" data-reveal>
+            <h2>Ready to <span class="grad">surge?</span></h2>
+            <p>Join thousands who unlocked their peak. One capsule away from your best performance.</p>
+            <a href="#buy" class="btn btn--primary btn--lg">
+                <span>Claim Your Mammoth Surge</span>
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <a href="#hero" class="brand">
+                    <span class="brand__mark">Z</span>
+                    <span class="brand__text"><strong>ZORVAN</strong><em>LABS</em></span>
+                </a>
+                <p>Premium performance supplements engineered for the relentless.</p>
+                <span class="footer__usa"><span class="flag" aria-hidden="true"></span> Proudly Made in the USA</span>
+            </div>
+            <nav class="footer__col" aria-label="Product">
+                <h5>Product</h5>
+                <a href="#benefits">Benefits</a>
+                <a href="#science">The Science</a>
+                <a href="#formula">Formula</a>
+                <a href="#showcase">Showcase</a>
+                <a href="#buy">Buy</a>
+            </nav>
+            <nav class="footer__col" aria-label="Company">
+                <h5>Company</h5>
+                <a href="#reviews">Reviews</a>
+                <a href="#faq">FAQ</a>
+                <a href="#">Contact</a>
+                <a href="#">Wholesale</a>
+            </nav>
+            <nav class="footer__col" aria-label="Legal">
+                <h5>Legal</h5>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Shipping</a>
+                <a href="#">Refunds</a>
+            </nav>
+        </div>
+        <div class="footer__bar">
+            <p>© <span id="year"></span> Zorvan Labs. All rights reserved.</p>
+            <p class="footer__disclaimer">*These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult a healthcare professional before use; discontinue if adverse effects occur. Not for individuals under 18 years.</p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

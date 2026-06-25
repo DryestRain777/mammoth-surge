@@ -1,0 +1,18 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build deploy artifact",
+			"type": "shell",
+			"command": "cd /Users/jonanthonyflores/mammoth-surge && rm -f ../mammoth-surge.zip && zip -r -X ../mammoth-surge.zip . -x '*.DS_Store' '*/.git/*' 'node_modules/*' && echo '---' && echo ZIP_READY && (command -v npx >/dev/null && echo NPX_AVAILABLE || echo NPX_MISSING) && (command -v git >/dev/null && echo GIT_AVAILABLE || echo GIT_MISSING)",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "env-check",
+			"type": "shell",
+			"command": "cd /Users/jonanthonyflores/mammoth-surge; echo START; node -v || echo no-node; npx -v || echo no-npx; git --version || echo no-git; echo END",
+			"isBackground": false
+		}
+	]
+}
