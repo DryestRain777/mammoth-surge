@@ -44,7 +44,7 @@
 *::before,
 *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
 
 body {
     font-family: var(--font-body);
@@ -54,6 +54,7 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Ambient background wash */
@@ -1727,6 +1728,15 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================================
+   PERFORMANCE — skip rendering of offscreen sections
+   ============================================================ */
+.benefits, .unleash, .science, .formula, .showcase,
+.reviews, .buy, .faq, .final, .footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 980px) {
@@ -1776,6 +1786,28 @@ ul, ol { list-style: none; }
     .stats { flex-wrap: wrap; gap: 1.4rem; }
     .footer__bar { flex-direction: column; }
     .spec--2 { right: 2%; }
+
+    /* Performance: drop the heaviest GPU layers on phones */
+    #ember-canvas, .grain,
+    .hero__rings, .hero__glow { display: none; }
+    .product-aura, .pack__glow, .showcase__glow,
+    .mammoth, .showcase__product { animation: none; }
+    .mammoth__ring, .showcase__ring,
+    .orbit__ring--1, .orbit__ring--2, .orbit__ring--3 { animation: none; }
+    .mammoth__sheen::after, .showcase__sheen::after, .caps__glint { display: none; }
+    .spec, .showcase__chip {
+        -webkit-backdrop-filter: none; backdrop-filter: none;
+        background: rgba(20, 13, 8, 0.9);
+    }
+    .btn--ghost { -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+    /* Layout polish */
+    .section { padding: 3.6rem 1.2rem; }
+    .section__head { margin-bottom: 2.2rem; }
+    .hero { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .hero__product { height: auto; min-height: 340px; padding: 0.5rem 0; }
+    .hero__cta { width: 100%; }
+    .hero__cta .btn--primary { flex: 1 1 12rem; justify-content: center; }
 }
 
 @media (max-width: 440px) {

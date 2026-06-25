@@ -5,6 +5,22 @@
     "use strict";
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const smallScreen = window.matchMedia("(max-width: 760px)").matches;
+    const conn = navigator.connection || {};
+    const lowPower = !!conn.saveData || (navigator.deviceMemory && navigator.deviceMemory <= 4);
+
+    // Run a function at most once per animation frame.
+    function rafThrottle(fn) {
+        let ticking = false, lastArgs;
+        return function (...args) {
+            lastArgs = args;
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(() => { ticking = false; fn.apply(this, lastArgs); });
+            }
+        };
+    }
 
     /* ---------- Year ---------- */
     const yearEl = document.getElementById("year");
@@ -14,7 +30,8 @@
     const nav = document.getElementById("nav");
     const progress = document.getElementById("scroll-progress");
 
-    function onScroll() {
+    function applyScroll() {
+        scrollScheduled = false;
         const y = window.scrollY;
         if (nav) nav.classList.toggle("scrolled", y > 30);
         if (progress) {
@@ -22,8 +39,15 @@
             progress.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
         }
     }
+    let scrollScheduled = false;
+    function onScroll() {
+        if (!scrollScheduled) {
+            scrollScheduled = true;
+            requestAnimationFrame(applyScroll);
+        }
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    applyScroll();
 
     /* ---------- Mobile menu ---------- */
     const burger = document.getElementById("nav-burger");
@@ -106,31 +130,36 @@
     }
 
     /* ---------- Card spotlight (pointer-follow glow) ---------- */
-    document.querySelectorAll(".card").forEach((card) => {
-        card.addEventListener("pointermove", (e) => {
-            const r = card.getBoundingClientRect();
-            card.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
-            card.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+    if (!coarse) {
+        document.querySelectorAll(".card").forEach((card) => {
+            const move = rafThrottle((cx, cy) => {
+                const r = card.getBoundingClientRect();
+                card.style.setProperty("--mx", ((cx - r.left) / r.width) * 100 + "%");
+                card.style.setProperty("--my", ((cy - r.top) / r.height) * 100 + "%");
+            });
+            card.addEventListener("pointermove", (e) => move(e.clientX, e.clientY), { passive: true });
         });
-    });
+    }
 
     /* ---------- Parallax on mammoth + product specs ---------- */
     const stage = document.getElementById("product-stage");
-    const card = document.querySelector(".mammoth__card");
-    if (stage && card && !prefersReduced && window.matchMedia("(pointer:fine)").matches) {
-        stage.addEventListener("pointermove", (e) => {
+    const mcard = document.querySelector(".mammoth__card");
+    if (stage && mcard && !prefersReduced && !coarse) {
+        const specs = stage.querySelectorAll(".spec");
+        const move = rafThrottle((cx, cy) => {
             const r = stage.getBoundingClientRect();
-            const dx = (e.clientX - r.left) / r.width - 0.5;
-            const dy = (e.clientY - r.top) / r.height - 0.5;
-            card.style.transform = `rotateX(${-dy * 12}deg) rotateY(${dx * 16}deg)`;
-            stage.querySelectorAll(".spec").forEach((s, i) => {
+            const dx = (cx - r.left) / r.width - 0.5;
+            const dy = (cy - r.top) / r.height - 0.5;
+            mcard.style.transform = `rotateX(${-dy * 12}deg) rotateY(${dx * 16}deg)`;
+            specs.forEach((s, i) => {
                 const depth = (i + 1) * 6;
                 s.style.transform = `translate(${dx * depth}px, ${dy * depth}px)`;
             });
         });
+        stage.addEventListener("pointermove", (e) => move(e.clientX, e.clientY), { passive: true });
         stage.addEventListener("pointerleave", () => {
-            card.style.transform = "";
-            stage.querySelectorAll(".spec").forEach((s) => (s.style.transform = ""));
+            mcard.style.transform = "";
+            specs.forEach((s) => (s.style.transform = ""));
         });
     }
 
@@ -159,36 +188,57 @@
         });
     });
 
-    /* ---------- Ember particle system ---------- */
+    /* ---------- Ember particle system (sprite-based, throttled) ---------- */
     const canvas = document.getElementById("ember-canvas");
-    if (canvas && !prefersReduced) {
+    if (canvas && !prefersReduced && !smallScreen && !lowPower) {
         const ctx = canvas.getContext("2d");
-        let w, h, embers, raf;
-        const DPR = Math.min(window.devicePixelRatio || 1, 2);
+        let w, h, embers, raf, last = 0;
+        const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+        const FRAME = 1000 / 40; // cap ~40fps for ambient embers
         const COLORS = ["#ff8a2b", "#ff5a1f", "#f4c14b", "#ff3d2e", "#ffb347"];
 
-        function resize() {
-            w = canvas.width = Math.floor(innerWidth * DPR);
-            h = canvas.height = Math.floor(innerHeight * DPR);
-            canvas.style.width = innerWidth + "px";
-            canvas.style.height = innerHeight + "px";
-            const count = Math.min(70, Math.floor((innerWidth * innerHeight) / 26000));
-            embers = Array.from({ length: count }, makeEmber);
-        }
+        // Pre-render soft glow sprites ONCE (avoids per-particle shadowBlur each frame).
+        const sprites = COLORS.map((hex) => {
+            const n = parseInt(hex.slice(1), 16);
+            const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+            const size = 24;
+            const sc = document.createElement("canvas");
+            sc.width = sc.height = size;
+            const sx = sc.getContext("2d");
+            const grd = sx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+            grd.addColorStop(0, `rgba(${r},${g},${b},1)`);
+            grd.addColorStop(0.3, `rgba(${r},${g},${b},0.7)`);
+            grd.addColorStop(1, `rgba(${r},${g},${b},0)`);
+            sx.fillStyle = grd;
+            sx.fillRect(0, 0, size, size);
+            return sc;
+        });
+
         function makeEmber(initial) {
             return {
                 x: Math.random() * w,
                 y: initial ? Math.random() * h : h + Math.random() * 40 * DPR,
-                r: (Math.random() * 2 + 0.6) * DPR,
+                r: (Math.random() * 2 + 0.8) * DPR,
                 vy: (Math.random() * 0.6 + 0.25) * DPR,
                 vx: (Math.random() - 0.5) * 0.4 * DPR,
                 a: Math.random() * 0.5 + 0.2,
                 tw: Math.random() * Math.PI * 2,
                 tws: Math.random() * 0.04 + 0.01,
-                c: COLORS[(Math.random() * COLORS.length) | 0],
+                s: (Math.random() * sprites.length) | 0,
             };
         }
-        function tick() {
+        function resize() {
+            w = canvas.width = Math.floor(innerWidth * DPR);
+            h = canvas.height = Math.floor(innerHeight * DPR);
+            canvas.style.width = innerWidth + "px";
+            canvas.style.height = innerHeight + "px";
+            const count = Math.min(40, Math.floor((innerWidth * innerHeight) / 36000));
+            embers = Array.from({ length: count }, () => makeEmber(true));
+        }
+        function tick(now) {
+            raf = requestAnimationFrame(tick);
+            if (now - last < FRAME) return;
+            last = now;
             ctx.clearRect(0, 0, w, h);
             ctx.globalCompositeOperation = "lighter";
             for (const e of embers) {
@@ -196,29 +246,23 @@
                 e.x += e.vx + Math.sin(e.tw) * 0.3 * DPR;
                 e.tw += e.tws;
                 const flicker = 0.6 + Math.sin(e.tw * 2) * 0.4;
+                const d = e.r * 7;
                 ctx.globalAlpha = e.a * flicker;
-                ctx.beginPath();
-                ctx.fillStyle = e.c;
-                ctx.shadowBlur = 12 * DPR;
-                ctx.shadowColor = e.c;
-                ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.drawImage(sprites[e.s], e.x - d / 2, e.y - d / 2, d, d);
                 if (e.y < -10 * DPR) Object.assign(e, makeEmber(false));
             }
             ctx.globalAlpha = 1;
-            ctx.shadowBlur = 0;
-            raf = requestAnimationFrame(tick);
         }
         resize();
-        tick();
+        raf = requestAnimationFrame(tick);
         let rt;
         window.addEventListener("resize", () => {
             clearTimeout(rt);
             rt = setTimeout(resize, 200);
         });
         document.addEventListener("visibilitychange", () => {
-            if (document.hidden) cancelAnimationFrame(raf);
-            else raf = requestAnimationFrame(tick);
+            cancelAnimationFrame(raf);
+            if (!document.hidden) { last = 0; raf = requestAnimationFrame(tick); }
         });
     }
 
