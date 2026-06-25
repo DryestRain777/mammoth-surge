@@ -5,3 +5,8 @@ node_modules/
 .netlify/
 .vercel/
 mammoth-surge.zip
+
+# Env secrets
+.env
+**/.env
+!**/.env.example

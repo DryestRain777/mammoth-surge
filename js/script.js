@@ -163,7 +163,7 @@
         });
     }
 
-    /* ---------- Buy buttons -> toast ---------- */
+    /* ---------- Toast ---------- */
     const toast = document.getElementById("toast");
     let toastTimer;
     function showToast(msg) {
@@ -173,15 +173,59 @@
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => toast.classList.remove("show"), 3200);
     }
+
+    /* ---------- Checkout (Stripe via backend) ---------- */
+    const API_BASE = ((window.MAMMOTH_CONFIG && window.MAMMOTH_CONFIG.apiBase) || "").replace(/\/$/, "");
+    const PLAN_BY_LABEL = {
+        "Single Surge": "single",
+        "Mammoth Pack": "mammoth",
+        "Beast Mode": "beast",
+    };
+
+    async function startCheckout(plan, btn) {
+        if (!API_BASE) {
+            // Demo mode — no backend configured yet.
+            showToast("Checkout isn’t connected yet — add your API URL in js/config.js");
+            return;
+        }
+        const original = btn ? btn.textContent : "";
+        if (btn) {
+            btn.disabled = true;
+            btn.dataset.loading = "1";
+            btn.textContent = "Redirecting…";
+        }
+        try {
+            const res = await fetch(`${API_BASE}/api/checkout`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ plan, quantity: 1 }),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || !data.url) {
+                throw new Error(data.error || `Checkout failed (${res.status})`);
+            }
+            window.location.assign(data.url); // → Stripe Checkout
+        } catch (err) {
+            showToast(`Checkout error: ${err.message}`);
+            if (btn) {
+                btn.disabled = false;
+                delete btn.dataset.loading;
+                btn.textContent = original;
+            }
+        }
+    }
+
     document.querySelectorAll("[data-buy]").forEach((btn) => {
         btn.addEventListener("click", () => {
-            showToast(`"${btn.dataset.buy}" added to cart — let's surge!`);
+            const plan = btn.dataset.plan || PLAN_BY_LABEL[btn.dataset.buy];
+            if (plan) startCheckout(plan, btn);
+            else showToast(`"${btn.dataset.buy}" added to cart — let's surge!`);
         });
     });
-    // Generic "Add to Cart" / "Surge Now" CTAs without a plan
+
+    // Generic "Add to Cart" CTAs (links) just guide users to the pricing table.
     document.querySelectorAll('a[href="#buy"]').forEach((a) => {
         a.addEventListener("click", () => {
-            // let smooth-scroll happen; subtle confirmation only on showcase CTA
             if (a.textContent.trim().toLowerCase().includes("add to cart")) {
                 showToast("Pick your power pack below 👇");
             }

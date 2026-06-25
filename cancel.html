@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0705" />
+    <meta name="robots" content="noindex" />
+    <title>Checkout Cancelled — Mammoth Surge™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+        .status { min-height: 100svh; display: grid; place-items: center; padding: 6rem 1.5rem; text-align: center; position: relative; }
+        .status__glow { position: absolute; top: 30%; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(circle, rgba(255,90,31,.18), transparent 60%); filter: blur(20px); pointer-events: none; }
+        .status__inner { position: relative; max-width: 540px; }
+        .status__badge { width: 92px; height: 92px; margin: 0 auto 1.6rem; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 50% 35%, #1c120a, #0a0604); border: 2px solid var(--line); }
+        .status__badge svg { color: var(--gold); }
+        .status h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1; margin-bottom: 1rem; }
+        .status p { color: var(--ink-dim); font-size: 1.08rem; }
+        .status__cta { margin-top: 2.2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+    <main class="status">
+        <div class="status__glow" aria-hidden="true"></div>
+        <div class="status__inner">
+            <div class="status__badge">
+                <svg viewBox="0 0 24 24" width="42" height="42" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v6M12 16.5h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h1>Checkout <span class="grad">cancelled</span></h1>
+            <p>No worries — you haven't been charged. Your mammoth power is still waiting whenever you're ready.</p>
+            <div class="status__cta">
+                <a href="index.html#buy" class="btn btn--primary">
+                    <span>Try Again</span>
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="index.html" class="btn btn--ghost"><span>Back to Home</span></a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
