@@ -42,7 +42,7 @@ cp .env.example .env   # then edit .env with your keys
 | `STRIPE_WEBHOOK_SECRET` | Created when you add a webhook endpoint (below), or printed by `stripe listen` |
 | `SHIPSTATION_API_KEY` / `SHIPSTATION_API_SECRET` | ShipStation → Settings → Account → API Settings → **Generate API Keys** |
 | `SHIPSTATION_STORE_ID` | *(optional)* ShipStation → Settings → Stores, to route imported orders |
-| `CLIENT_URL` | Your storefront URL, e.g. `https://dryestrain777.github.io/mammoth-surge` |
+| `CLIENT_URL` | Your storefront URL, e.g. `https://mammothsurge.com` |
 
 ## 4. Run locally
 

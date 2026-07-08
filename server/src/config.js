@@ -34,6 +34,8 @@ const config = {
 // Origins allowed to call the API (CORS). *.github.io is also allowed at runtime.
 config.allowedOrigins = [
     config.clientUrl,
+    "https://mammothsurge.com",
+    "https://www.mammothsurge.com",
     "http://localhost:5510",
     "http://127.0.0.1:5510",
 ];
