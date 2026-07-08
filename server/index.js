@@ -9,6 +9,7 @@ const config = require("./src/config");
 const { isConfigured } = require("./src/stripe");
 const { createCheckoutSession, getOrder } = require("./src/routes/checkout");
 const { handleWebhook } = require("./src/routes/webhook");
+const { getShipStationHealth } = require("./src/routes/shipstation");
 
 const app = express();
 app.set("trust proxy", 1);
@@ -46,10 +47,14 @@ app.get("/api/health", (req, res) => {
         ok: true,
         stripe: isConfigured(),
         shipstation: config.shipstationConfigured,
+        shipstationBaseUrl: config.shipstation.baseUrl,
         clientUrl: config.clientUrl,
         time: new Date().toISOString(),
     });
 });
+
+// Read-only check of the ShipStation credentials against the live API.
+app.get("/api/shipstation/health", getShipStationHealth);
 
 app.post("/api/checkout", createCheckoutSession);
 app.get("/api/order/:id", getOrder);

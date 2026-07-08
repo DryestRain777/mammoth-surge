@@ -59,6 +59,30 @@ curl http://localhost:4242/api/health
 # { "ok": true, "stripe": true, "shipstation": true, ... }
 ```
 
+### Verify ShipStation is connected
+
+Two helper scripts confirm your ShipStation keys work **before** you take a real
+order:
+
+```bash
+npm run ss:test    # read-only: validates your API key/secret and lists carriers
+npm run ss:order   # creates ONE sample order in ShipStation so you can see the
+                   # full name / address / SKU mapping (delete it afterwards)
+```
+
+Successful `ss:test` output:
+
+```
+✅ Connected. 3 carrier(s): stamps_com, ups, fedex
+```
+
+Or hit the live status endpoint:
+
+```bash
+curl http://localhost:4242/api/shipstation/health
+# 200 → { "ok": true, "carriers": [...] }    502 → keys rejected    503 → not set
+```
+
 ## 5. Test the Stripe webhook locally
 
 Install the [Stripe CLI](https://stripe.com/docs/stripe-cli), then:
@@ -122,12 +146,13 @@ will redirect customers to Stripe Checkout. After payment they return to
 | Method | Path | Purpose |
 | --- | --- | --- |
 | `GET` | `/api/health` | Liveness + which integrations are configured |
+| `GET` | `/api/shipstation/health` | Read-only ShipStation credential check |
 | `POST` | `/api/checkout` | Body `{ plan, quantity? }` → `{ id, url }` |
 | `GET` | `/api/order/:id` | Order summary for the success page |
 | `POST` | `/api/webhook` | Stripe events (raw body, signature-verified) |
 
-Plans: `single` ($19.99), `mammoth` ($79.99), `beast` ($129.99) — defined in
-[`src/products.js`](src/products.js).
+Plans: `single` ($8.00 · 1 capsule), `mammoth` ($20.00 · 3 capsules),
+`beast` ($50.00 · 10 capsules) — defined in [`src/products.js`](src/products.js).
 
 ## Going live checklist
 

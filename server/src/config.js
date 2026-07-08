@@ -25,7 +25,9 @@ const config = {
         apiKey: get("SHIPSTATION_API_KEY"),
         apiSecret: get("SHIPSTATION_API_SECRET"),
         storeId: get("SHIPSTATION_STORE_ID"),
+        orderSource: get("SHIPSTATION_ORDER_SOURCE", "Mammoth Surge Web"),
         baseUrl: get("SHIPSTATION_BASE_URL", "https://ssapi.shipstation.com").replace(/\/$/, ""),
+        timeoutMs: parseInt(get("SHIPSTATION_TIMEOUT_MS", "15000"), 10),
     },
 };
 

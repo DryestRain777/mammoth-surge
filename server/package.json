@@ -10,7 +10,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "node --watch index.js"
+    "dev": "node --watch index.js",
+    "ss:test": "node scripts/test-connection.js",
+    "ss:order": "node scripts/create-test-order.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
